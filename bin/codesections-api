@@ -1,0 +1,13 @@
+#! /usr/bin/env raku
+use Cro::HTTP::Server;
+use lib 'lib';
+use Codesections::API;
+
+unit sub MAIN(:p(:$port) = 2314, :h($host) = 'localhost');
+
+for %*ENV<CODESEC_API_USER CODESEC_API_PASSWORD> {
+    unless $_ { note "Please set $_ enviornmental variable" and exit 1 }}
+    
+given Cro::HTTP::Server.new: :$host, :$port, :application($App) -> $app {
+    $app.start;
+    react whenever signal(SIGINT) { $app.stop; exit }}

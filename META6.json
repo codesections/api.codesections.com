@@ -1,0 +1,19 @@
+{
+    "perl" : "6.d",
+    "name" : "Codesections::API",
+    "api"  : "1",
+    "auth" : "github:codesections",
+    "version" : "0.0.1",
+    "description" : "",
+    "authors" : [ "daniel@codesections.com" ],
+    "license" : "Artistic-2.0",
+    "provides" : { "Codesections::API": "lib/Codesections/API.rakumod" },
+    "depends" : [ "Cro::HTTP::Router",
+                  "Cro::HTTP::Server",
+                  "MIME::Base64" ],
+    "build-depends" : [ ],
+    "test-depends" : [ ],
+    "resources" : [ ],
+    "tags": [],
+    "source-url" : ""
+}
