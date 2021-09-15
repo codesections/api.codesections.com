@@ -29,7 +29,7 @@ sub ApiInfo(Handler $_ (:$method, :$routes=.prefix, *%) --> ApiInfo) {
 #|       headers: authorization
 #|     Any description from the Cro handler 
 #| Missing fields (e.g., headers) are skipped; optional segments are [bracketed]
-sub fmt-api-docs(ApiInfo $_ (:$method, :$description,
+sub fmt-api-docs(ApiInfo $_ (:$method, :$description, *%,
         :&bracket-optional = {.?optional ?? "[$_]" !! $_};
         :$route  = .routes.map(&bracket-optional).join: '/';
         :$query  = .queries.map(&bracket-optional).join: '&';
@@ -52,7 +52,9 @@ method build($directory, :$ ($path = "$directory/README.md")) {
         .map(&ApiInfo)
         .map(&fmt-api-docs)
         .join("\n\n")
+        .indent: 4
      ==> update-api-docs :old-docs(slurp $path)
+     
      ==> spurt $path }
 
 
